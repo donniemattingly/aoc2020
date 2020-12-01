@@ -47,16 +47,34 @@ defmodule Day1 do
   def parse_input2(input), do: parse_input(input)
 
   def solve1(input), do: solve(input)
-  def solve2(input), do: solve(input)
 
-  def parse_and_solve1(input), do: parse_input1(input) |> solve1
-  def parse_and_solve2(input), do: parse_input2(input) |> solve2
+  def parse_and_solve1(input),
+      do: parse_input1(input)
+          |> solve1
+  def parse_and_solve2(input),
+      do: parse_input2(input)
+          |> solve2
 
   def parse_input(input) do
     input
+    |> Utils.split_lines
+    |> Enum.map(&String.to_integer/1)
   end
 
   def solve(input) do
     input
+
+    {x, y} = (for x <- input, y <- input, do: {x, y})
+             |> Enum.filter(fn {x, y} -> x + y == 2020 end)
+             |> hd
+
+    x * y
+  end
+
+  def solve2(input) do
+    {x, y, z} = (for x <- input, y <- input, z <- input, do: {x, y, z})
+                |> Enum.filter(fn {x, y, z} -> x + y + z == 2020 end)
+                |> hd
+    x * y * z
   end
 end
