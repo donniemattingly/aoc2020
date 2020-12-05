@@ -7,36 +7,28 @@
       <sourceFolder url="file://$MODULE_DIR$/lib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/color_utils" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/comb" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/combine" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/earmark" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/elixir_make" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ex_doc" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/flow" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/gen_stage" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/libgraph" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/makeup" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/makeup_elixir" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/matrex" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/memoize" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/nimble_parsec" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/color_utils" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/comb" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/combine" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/elixir_make" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/flow" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/gen_stage" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/libgraph" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/matrex" />
-      <excludeFolder url="file://$MODULE_DIR$/_build/test/lib/memoize" />
       <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix" />
       <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix_html" />
       <excludeFolder url="file://$MODULE_DIR$/cover" />
       <excludeFolder url="file://$MODULE_DIR$/deps" />
       <excludeFolder url="file://$MODULE_DIR$/doc" />
       <excludeFolder url="file://$MODULE_DIR$/logs" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/makeup" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/matrex" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/combine" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/libgraph" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/gen_stage" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/color_utils" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/elixir_make" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/nimble_parsec" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/earmark" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/ex_doc" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/memoize" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/makeup_elixir" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/flow" />
+      <excludeFolder url="file://$MODULE_DIR$/_build/dev/lib/comb" />
     </content>
+    <orderEntry type="jdk" jdkName="Elixir 1.11.2" jdkType="Elixir SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="earmark" level="project" />
     <orderEntry type="library" name="ex_doc" level="project" />
