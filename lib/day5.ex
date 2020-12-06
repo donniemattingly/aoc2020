@@ -100,4 +100,8 @@ defmodule Day5 do
     |> hd
     |> Kernel.+(1)
   end
+
+  def testfn() do
+    "food is good"
+  end
 end

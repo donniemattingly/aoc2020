@@ -16,10 +16,11 @@ defmodule Adventofcode.MixProject do
 
   # Run "mix help compile.app" to learn about applications.
   def application do
-    [
-      extra_applications: [:logger]
-    ]
+    [applications: applications(Mix.env)]
   end
+
+  defp applications(:dev), do: applications(:all) ++ [:remix]
+  defp applications(_all), do: [:logger]
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
@@ -32,7 +33,8 @@ defmodule Adventofcode.MixProject do
       {:memoize, "~> 1.2"},
       {:combine, "~> 0.10.0"},
       {:color_utils, "0.2.0"},
-      {:comb, git: "https://github.com/tallakt/comb.git"}
+      {:comb, git: "https://github.com/tallakt/comb.git"},
+      {:remix, "~> 0.0.1", only: :dev}
     ]
   end
 end
