@@ -9,19 +9,19 @@ defmodule Day6 do
     """
     abc
 
-a
-b
-c
+    a
+    b
+    c
 
-ab
-ac
+    ab
+    ac
 
-a
-a
-a
-a
+    a
+    a
+    a
+    a
 
-b
+    b
 
     """
   end
@@ -30,19 +30,19 @@ b
     """
     abc
 
-a
-b
-c
+    a
+    b
+    c
 
-ab
-ac
+    ab
+    ac
 
-a
-a
-a
-a
+    a
+    a
+    a
+    a
 
-b
+    b
     """
   end
 
@@ -73,7 +73,6 @@ b
   def real_input1, do: real_input()
   def real_input2, do: real_input()
 
-
   def parse_input1(input), do: parse_input(input)
   def parse_input2(input), do: parse_input(input)
 
@@ -93,12 +92,12 @@ b
     |> Enum.map(&String.to_charlist/1)
     |> Enum.map(&MapSet.new/1)
     |> Enum.map(&MapSet.size/1)
-    |> Enum.sum
+    |> Enum.sum()
   end
 
   def count_for_entry(entry) do
     entry
-    |> Utils.split_lines
+    |> Utils.split_lines()
     |> Enum.map(&String.to_charlist/1)
     |> Enum.map(&MapSet.new/1)
     |> Enum.reduce(fn x, acc -> MapSet.intersection(x, acc) end)
