@@ -128,7 +128,7 @@ defmodule Day7 do
   def get_bags_that_could_contain(bag_map, type) do
     case Map.get(bag_map, type) do
       nil -> type
-      l -> [type | Enum.map(l, &get_bags_that_could_contain(bag_map, &1))]
+      l -> [type | Enum.map(l, &get_bags_that_could_contain(bag_map, &1)) |> Utils.List.flatten()]
     end
   end
 
@@ -136,12 +136,12 @@ defmodule Day7 do
     input
     |> get_contains_map()
     |> get_bags_that_could_contain("shiny gold")
-    |> Utils.List.flatten()
+    |> IO.inspect()
     |> MapSet.new()
     |> MapSet.size()
   end
 
-  def get_bags_contained_withing(bag_map, bag, num \\ 1) do
+  def get_bags_contained_within(bag_map, bag, num \\ 1) do
     IO.inspect(bag)
 
     case Map.get(bag_map, bag) do
@@ -151,7 +151,7 @@ defmodule Day7 do
       l ->
         l
         |> Enum.map(fn {type, count} ->
-          count * get_bags_contained_withing(bag_map, type, num)
+          count * get_bags_contained_within(bag_map, type, num)
         end)
         |> Enum.sum()
     end + num
@@ -160,7 +160,17 @@ defmodule Day7 do
   def solve2(input) do
     input
     |> get_contains_map2()
-    |> get_bags_contained_withing("shiny gold")
+    |> get_bags_contained_within("shiny gold")
     |> Kernel.-(1)
+  end
+
+  def get_color_options() do
+    Day7.real_input()
+    |> Day7.parse_input()
+    |> Utils.List.flatten()
+    |> Enum.uniq()
+    |> Enum.reject(&is_number/1)
+    |> Enum.reject(&is_nil/1)
+    |> Enum.map(&String.split/1)
   end
 end
