@@ -81,7 +81,6 @@ defmodule Utils do
   """
   def time(fun) do
     {elapsed, _} = :timer.tc(fun)
-
     elapsed / 1_000_000
   end
 

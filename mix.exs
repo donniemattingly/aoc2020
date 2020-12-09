@@ -23,7 +23,7 @@ defmodule Adventofcode.MixProject do
   defp applications(_all), do: [:logger]
 
   # Run "mix help deps" to learn about dependencies.
-  defp deps do
+  def deps do
     [
       {:earmark, "~> 1.2", only: :dev},
       {:ex_doc, "~> 0.19", only: :dev},
