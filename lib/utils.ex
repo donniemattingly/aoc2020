@@ -84,6 +84,13 @@ defmodule Utils do
     elapsed / 1_000_000
   end
 
+  def benchmark(fun, sample) do
+    1..sample
+    |> Enum.map(fn _ -> time(fun) end)
+    |> Enum.sum
+    |> Kernel./(sample)
+  end
+
   @doc """
   Inspects a value, but only if a random value generate is greater than
   `threshold`

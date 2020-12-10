@@ -73,17 +73,18 @@ defmodule Day9 do
   def is_num_some_sum_of_prev(chunk) do
     {nums, [test]} = Enum.split(chunk, -1)
 
-      l =  for(x <- nums, y <- nums, do: {x, y})
-     |> Stream.filter(fn {x, y} -> x != y end)
-     |> Stream.map(fn {x, y} -> x + y end)
-     |> Stream.filter(fn x -> x == test end)
-     |> Stream.take(1)
-     |> Enum.to_list
+    l =
+      for(x <- nums, y <- nums, do: {x, y})
+      |> Stream.filter(fn {x, y} -> x != y end)
+      |> Stream.map(fn {x, y} -> x + y end)
+      |> Stream.filter(fn x -> x == test end)
+      |> Stream.take(1)
+      |> Enum.to_list()
 
-     case l do
-      [h] -> {test, true}
+    case l do
+      [_] -> {test, true}
       [] -> {test, false}
-     end
+    end
   end
 
   def num_not_composed_of_prev(nums, pre_size) do
@@ -92,7 +93,7 @@ defmodule Day9 do
     |> Stream.map(&is_num_some_sum_of_prev/1)
     |> Stream.filter(fn {_, is_composed} -> !is_composed end)
     |> Stream.take(1)
-    |> Enum.to_list
+    |> Enum.to_list()
   end
 
   def get_weakness(nums, weak_num) do
@@ -106,7 +107,7 @@ defmodule Day9 do
       |> hd
       |> elem(1)
 
-      Enum.min(chunk) + Enum.max(chunk)
+    Enum.min(chunk) + Enum.max(chunk)
   end
 
   def solve(input, size) do
