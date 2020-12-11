@@ -142,4 +142,8 @@ defmodule Day10 do
     end)
     |> Map.new()
   end
+
+  defmemo foo(a, b) do
+    a + b
+  end
 end
