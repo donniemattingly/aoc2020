@@ -128,7 +128,7 @@ defmodule Day12 do
 
   def rotate_waypoint({:r, 1}, {x, y}), do: {y, -x}
   def rotate_waypoint({:r, 2}, {x, y}), do: {-x, -y}
-  def rotate_waypoint({:r, 3}, {x, y}), do: {y, -x}
+  def rotate_waypoint({:r, 3}, {x, y}), do: {-y, x}
   def rotate_waypoint({:r, -1}, {x, y}), do: {-y, x}
   def rotate_waypoint({:r, -2}, {x, y}), do: {-x, -y}
   def rotate_waypoint({:r, -3}, {x, y}), do: {y, -x}
