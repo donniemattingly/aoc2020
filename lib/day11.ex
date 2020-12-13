@@ -332,9 +332,7 @@ defmodule Day11 do
     evolve(map)
     |> Stream.chunk_every(2, 1)
     |> Stream.drop_while(fn [a, b] -> a != b end)
-    |> Stream.take(1)
-    |> Enum.to_list
-    |> hd
+    |> Utils.Stream.pop
     |> hd
   end
 
