@@ -68,6 +68,20 @@ defmodule Day13 do
     |> Utils.Stream.pop()
   end
 
+  def step_increasing(times), do: step_increasing(times, 2, 1)
+
+  def step_increasing([{bus, offset} | rest], count, cumulative_buses) do
+    new_count = Stream.iterate(count, & &1 + cumulative_buses)
+    |> Stream.drop_while(fn timestamp -> rem(timestamp + offset, bus) != 0  end)
+    |> Utils.Stream.pop()
+
+    step_increasing(rest, new_count, cumulative_buses * bus)
+  end
+
+  def step_increasing([], count, _) do
+    count
+  end
+
   def test_timestamp(times, timestamp) do
     times
     |> Enum.all?(fn {time, offset} -> rem(timestamp + offset, time) == 0 end)
@@ -75,6 +89,10 @@ defmodule Day13 do
 
   def solve(input) do
     input
-    |> brute_force()
+    |> step_increasing()
+  end
+
+  def test_fastutils() do
+    Utils.Fast.test_timestamp(10, [1, 2, 3], [2, 4, 6])
   end
 end

@@ -10,7 +10,9 @@ defmodule Adventofcode.MixProject do
       deps: deps(),
       docs: [
         output: "docs"
-      ]
+      ],
+      compilers: [:rustler] ++ Mix.compilers(),
+      rustler_crates: [fastutils: []]
     ]
   end
 
