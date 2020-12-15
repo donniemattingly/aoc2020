@@ -64,10 +64,6 @@ defmodule Day15 do
   end
 
   def run_turn(turns, last, turn, stop) do
-    # IO.inspect({last, turn, stop})
-    # IO.inspect(turns)
-    # IO.inspect({Map.get(turns, last), turn})
-
     case Map.get(turns, last) do
       nil -> run_turn(Map.put(turns, last, turn), 0, turn + 1, stop)
       x -> run_turn(Map.put(turns, last, turn), turn - x, turn + 1, stop)
