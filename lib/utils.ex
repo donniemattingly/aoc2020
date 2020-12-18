@@ -156,6 +156,15 @@ defmodule Utils do
     IO.inspect(value, opts)
   end
 
+  def combinations(list, num)
+  def combinations(_list, 0), do: [[]]
+  def combinations(list = [], _num), do: list
+
+  def combinations([head | tail], num) do
+    Enum.map(combinations(tail, num - 1), &[head | &1]) ++
+      combinations(tail, num)
+  end
+
   def log_inspect(value), do: value
 
   def flatten_map(map) when is_map(map) do
@@ -246,10 +255,11 @@ defmodule Utils do
 
   def colorize(str, color) do
     import IO.ANSI
+
     colors = %{
       red: rgb_color_background(100, 0, 0),
       green: rgb_color_background(0, 100, 0),
-      blue: rgb_color_background(0, 0, 100),
+      blue: rgb_color_background(0, 0, 100)
     }
 
     colors[color] <> str <> IO.ANSI.default_background()
@@ -276,4 +286,17 @@ defmodule Utils do
     |> Stream.with_index()
     |> Stream.map(fn {value, x} -> {{x, row_number}, value} end)
   end
+
+  @doc """
+  Map.put but each put will perform and aggregation function which
+  keeps in state in the map. Think keeping a running total of the
+  largest value so you don't have to scan the entire map
+
+  agg_fn takes the map and the value and produces a new map
+  """
+  def put_with_aggreation(agg_fn, map, key, value) do
+    agg_fn.(map, value)
+    |> Map.put(key, value)
+  end
+
 end

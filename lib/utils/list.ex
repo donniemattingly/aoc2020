@@ -38,4 +38,13 @@ defmodule Utils.List do
   def flatten([head | tail]), do: flatten(head) ++ flatten(tail)
   def flatten([]), do: []
   def flatten(element), do: [element]
+
+  def cartesian([]), do: []
+  def cartesian(lists), do: cartesian(Enum.reverse(lists), []) |> Enum.to_list()
+
+  defp cartesian([], elems), do: [elems]
+
+  defp cartesian([h | tail], elems) do
+    Stream.flat_map(h, fn x -> cartesian(tail, [x | elems]) end)
+  end
 end

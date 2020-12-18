@@ -160,20 +160,20 @@ defmodule Day16 do
     end)
   end
 
-  def derive_category_for_position(categories_for_positions) do
-    do_derive(categories_for_positions, %{})
-  end
+  def derive_category_for_position(categories_for_positions), do: derive_category_for_position(categories_for_positions, %{})
+  def derive_category_for_position([], confirmed), do: confirmed
 
-  def do_derive([], confirmed), do: confirmed
-
-  def do_derive(position_categories, confirmed) do
+  def derive_category_for_position(position_categories, confirmed) do
+    # get pos->category with the smallest size (1)
     [{pos, categories} | rest] =
       position_categories
       |> Enum.sort(&(MapSet.size(elem(&1, 1)) < MapSet.size(elem(&2, 1))))
 
+    # add this category to the confirmed map
     category = MapSet.to_list(categories) |> hd
     new_confirmed = Map.put(confirmed, pos, category)
 
+    # update the rest of the list removing the category we used
     updated_remaining =
       rest
       |> Enum.map(fn {pos, categories} -> {pos, MapSet.delete(categories, category)} end)
@@ -182,7 +182,8 @@ defmodule Day16 do
         _ -> true
       end)
 
-    do_derive(updated_remaining, new_confirmed)
+    # recurse recurse
+    derive_category_for_position(updated_remaining, new_confirmed)
   end
 
   def add_category_to_ticket(ticket, position_to_category) do
@@ -194,17 +195,17 @@ defmodule Day16 do
     |> Map.new
   end
 
-  def solve2(input = %{categories: categories, my: my}) do
+  def solve2(input = %{categories: categories, my: my_ticket}) do
     position_to_category = input
     |> get_valid_nearby()
     |> convert_list_of_nearby_tickets_to_position_sets()
     |> get_categories_for_position(categories)
     |> derive_category_for_position()
 
-    add_category_to_ticket(my, position_to_category)
+    add_category_to_ticket(my_ticket, position_to_category)
     |> Map.to_list
     |> Enum.filter(fn {name, _} -> String.starts_with?(name, "departure") end)
-    |> Enum.map(fn {name, val} -> val end)
+    |> Enum.map(fn {_, val} -> val end)
     |> Enum.reduce(1, &Kernel.*/2)
   end
 end
