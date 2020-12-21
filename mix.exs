@@ -13,7 +13,8 @@ defmodule Adventofcode.MixProject do
         output: "docs"
       ],
       compilers: [:rustler] ++ Mix.compilers(),
-      rustler_crates: [fastutils: []]
+      rustler_crates: [fastutils: []],
+      xref: [exclude: Matrex]
     ]
   end
 
@@ -33,6 +34,7 @@ defmodule Adventofcode.MixProject do
       {:matrex, "~> 0.6"},
       {:libgraph, "~> 0.13"},
       {:flow, "~> 0.14"},
+      {:egd, github: "erlang/egd"},
       {:memoize, "~> 1.2"},
       {:combine, "~> 0.10.0"},
       {:color_utils, "0.2.0"},

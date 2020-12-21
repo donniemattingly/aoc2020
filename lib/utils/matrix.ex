@@ -44,4 +44,30 @@ defmodule Utils.Matrix do
       end
     end)
   end
+
+  def horizontal_reflection(matrix) do
+    matrix
+    |> Matrex.to_list_of_lists()
+    |> Enum.map(&Enum.reverse/1)
+    |> Matrex.new()
+  end
+
+  def vertical_reflection(matrix) do
+    matrix
+    |> Matrex.to_list_of_lists()
+    |> Enum.reverse()
+    |> Matrex.new
+  end
+
+  def rotate_clockwise(matrix) do
+    matrix
+    |> Matrex.transpose()
+    |> horizontal_reflection()
+  end
+
+  def rotate_counterclockwise(matrix) do
+    matrix
+    |> Matrex.transpose()
+    |> vertical_reflection()
+  end
 end
