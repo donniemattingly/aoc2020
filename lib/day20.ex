@@ -166,7 +166,7 @@ defmodule Day20 do
         new_current = Map.put(current_map, {cur_x, cur_y}, option)
         {next_x, next_y} = next_pos(cur_x, cur_y, macro_size)
 
-        case next_y > macro_size do
+        case next_y > macro_size || next_x > macro_size do
           true ->
             IO.inspect({next_x, next_y}, label: "exited on")
             new_current
@@ -190,7 +190,7 @@ defmodule Day20 do
 
   def remove_other_rotations_of_tile(available_tiles, {id, _}) do
     rotations =
-      0..5
+      0..7
       |> Enum.map(&{id, &1})
       |> MapSet.new()
 
@@ -223,7 +223,16 @@ defmodule Day20 do
       |> Utils.Matrix.rotate_clockwise()
       |> Utils.Matrix.rotate_clockwise(),
       matrix |> Utils.Matrix.horizontal_reflection(),
-      matrix |> Utils.Matrix.vertical_reflection()
+      matrix |> Utils.Matrix.horizontal_reflection() |> Utils.Matrix.rotate_clockwise(),
+      matrix
+      |> Utils.Matrix.horizontal_reflection()
+      |> Utils.Matrix.rotate_clockwise()
+      |> Utils.Matrix.rotate_clockwise(),
+      matrix
+      |> Utils.Matrix.horizontal_reflection()
+      |> Utils.Matrix.rotate_clockwise()
+      |> Utils.Matrix.rotate_clockwise()
+      |> Utils.Matrix.rotate_clockwise()
     ]
   end
 
@@ -243,7 +252,7 @@ defmodule Day20 do
   end
 
   def solve2(input) do
-    macro_size = 3
+    macro_size = 12
     raw_tiles = input |> Map.new()
     corners = for x <- raw_tiles |> Map.keys(), y <- 0..5, do: {x, y}
 
@@ -255,13 +264,23 @@ defmodule Day20 do
 
     layout =
       corners
-      |> Enum.map(&assemble_map(tiles, &1, 3))
+      |> Enum.map(&assemble_map(tiles, &1, macro_size))
       |> Enum.reject(&Enum.empty?/1)
       |> hd
       |> Enum.map(fn {point, tile_id} ->
         generate_sparse_matrix_with_tile(point, tiles[tile_id], macro_size)
       end)
       |> Enum.reduce(&Matrex.add/2)
+
+    total = Matrex.sum(layout) |> IO.inspect
+
+    num_monsters = layout
+    |> get_possible_rotations()
+    |> Enum.map(&find_monsters/1)
+    |> Enum.filter(fn x -> x != 0 end)
+    |> hd
+
+    total - num_monsters * 15
   end
 
   def render_matrix(matrix) do
@@ -290,9 +309,45 @@ defmodule Day20 do
       1..macro_size
       |> Enum.map(fn row ->
         1..macro_size
-        |> Enum.map(&Map.get(map_with_tile, {&1, row} |> IO.inspect()))
+        |> Enum.map(&Map.get(map_with_tile, {&1, row}))
         |> Enum.reduce(&Matrex.concat(&2, &1, :columns))
       end)
       |> Enum.reduce(&Matrex.concat(&2, &1, :rows))
+  end
+
+  def monster_matrix do
+    monster = [
+      "                  # ",
+      "#    ##    ##    ###",
+      " #  #  #  #  #  #   "
+    ]
+
+    monster
+    |> Enum.map(fn line ->
+      line
+      |> Utils.split_each_char()
+      |> Enum.map(fn
+        "#" -> 1
+        _ -> 0
+      end)
+    end)
+    |> Matrex.new()
+  end
+
+  def find_monsters(map) do
+    {size, _} = Matrex.size(map)
+    monster = monster_matrix()
+    {mx, my} = Matrex.size(monster)
+
+    starting_points = for x <- 1..(size - mx), y <- 1..(size - my), do: {x, y}
+
+    starting_points
+    |> Enum.map(fn {x, y} ->
+      {{x, y}, Matrex.submatrix(map, x..(x + mx - 1), y..(y + my - 1))}
+    end)
+    |> Enum.map(fn {p, m} ->
+      {p, Matrex.multiply(m, monster) |> Matrex.sum()}
+    end)
+    |> Enum.count(&(elem(&1, 1) == 15))
   end
 end
