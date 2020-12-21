@@ -160,7 +160,7 @@ defmodule Day16 do
     end)
   end
 
-  def derive_category_for_position(categories_for_positions), do: derive_category_for_position(categories_for_positions, %{})
+  def derive_category_for_position(categories_for_positions), do: derive_category_for_position(categories_for_positions |> IO.inspect, %{})
   def derive_category_for_position([], confirmed), do: confirmed
 
   def derive_category_for_position(position_categories, confirmed) do
@@ -196,9 +196,12 @@ defmodule Day16 do
   end
 
   def solve2(input = %{categories: categories, my: my_ticket}) do
+
+    IO.inspect(categories)
+
     position_to_category = input
-    |> get_valid_nearby()
-    |> convert_list_of_nearby_tickets_to_position_sets()
+    |> get_valid_nearby() |> IO.inspect
+    |> convert_list_of_nearby_tickets_to_position_sets() |> IO.inspect
     |> get_categories_for_position(categories)
     |> derive_category_for_position()
 
