@@ -102,7 +102,6 @@ defmodule Day21 do
   end
 
   def solve2(input) do
-    known_allergens =
       input
       |> Enum.flat_map(&expand_allergens/1)
       |> Enum.reduce(%{}, fn {a, ingredients}, acc ->

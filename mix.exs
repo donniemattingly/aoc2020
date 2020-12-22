@@ -34,6 +34,7 @@ defmodule Adventofcode.MixProject do
       {:matrex, "~> 0.6"},
       {:libgraph, "~> 0.13"},
       {:flow, "~> 0.14"},
+      {:qex, "~> 0.5"},
       {:egd, github: "erlang/egd"},
       {:memoize, "~> 1.2"},
       {:combine, "~> 0.10.0"},
