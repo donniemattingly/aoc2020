@@ -58,6 +58,12 @@ defmodule Utils do
     |> Enum.map(&String.trim/1)
   end
 
+  def split_and_parse_lines(input, parser_fn) do
+    input
+    |> split_lines()
+    |> Enum.map(fn x -> parser_fn.(x) end)
+  end
+
   def split_each_char(input) do
     input
     |> String.split("")
